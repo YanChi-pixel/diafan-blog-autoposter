@@ -1,0 +1,48 @@
+{
+  "site": {
+    "base_url": "https://your-site.example.com",
+    "blog_path": "/news",
+    "news_site_id": 0,
+    "news_cat_id": 0,
+    "public_blog_path": "/news",
+    "preview_css": "",
+    "rate_limit": {
+      "min_seconds_between_requests": 4,
+      "max_retries": 4,
+      "backoff_base_seconds": 8
+    }
+  },
+  "llm": {
+    "provider": "deepseek",
+    "model": "deepseek-chat",
+    "temperature": 0.75,
+    "max_tokens": 8000,
+    "timeout_seconds": 240
+  },
+  "images": {
+    "provider": "auto",
+    "width": 800,
+    "height": 510,
+    "jpeg_quality": 88,
+    "fallback_provider": "pillow_brand",
+    "allow_openverse": false,
+    "note": "auto — подбор из Pexels; none — только заглушка, фото вручную через set_cover.py"
+  },
+  "content": {
+    "target_words_min": 1800,
+    "target_words_max": 2500,
+    "internal_links_min": 2,
+    "internal_links_target": 3,
+    "internal_links_max": 4
+  },
+  "paths": {
+    "themes": "data/themes.txt",
+    "internal_links": "data/internal_links.json",
+    "catalog": "data/catalog.json",
+    "registry": "data/registry.json",
+    "output_dir": "output",
+    "jobs_dir": "jobs",
+    "backup_dir": "data/backups",
+    "excluded_topics": "data/excluded_topics.json"
+  }
+}

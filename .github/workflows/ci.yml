@@ -1,0 +1,40 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  lint-and-test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.10", "3.12"]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt ruff
+
+      - name: Ruff
+        run: ruff check src tests
+
+      - name: Byte-compile
+        run: python -m compileall -q src tests
+
+      - name: Smoke import
+        working-directory: src
+        run: |
+          python -c "import settings, dupes, linker, verify, slug, images, writer, recrawl, diafan, catalog, check, deploy, topics, run_one, set_cover, ftp_client, logsetup; print('imports ok')"
+
+      - name: Pipeline tests
+        run: python tests/test_pipeline.py
